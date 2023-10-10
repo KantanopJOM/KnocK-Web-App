@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Member;
+import com.example.demo.model.SignupRequest;
 import com.example.demo.service.SignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,8 +22,7 @@ public class SignupController {
     }
 
     @PostMapping("/signup")
-    public String signupUser(@ModelAttribute Member user, Model model) {
-        System.out.println("control:"+user.getFirstName());
+    public String signupUser(@ModelAttribute SignupRequest user, Model model) {
         if (signupService.isUsernameAvailable(user.getUsername())) {
             signupService.createUser(user);
             model.addAttribute("signupSuccess", true);
