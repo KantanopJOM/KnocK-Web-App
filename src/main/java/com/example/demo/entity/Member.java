@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Member {
     @Id
     @GeneratedValue
-    private UUID user_id;
+    private UUID userId;
 
     private String firstName;
     private String lastName;
