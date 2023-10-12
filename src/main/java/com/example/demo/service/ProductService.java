@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -28,8 +29,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public void createProduct(ProductRequest request) {
+    public void createProduct(ProductRequest request, MultipartFile productImage) {
         Product record = modelMapper.map(request, Product.class);
+
+        String fileName = System.currentTimeMillis() + "_" + StringUtils.cleanPath(productImage.getOriginalFilename());
+        record.setProductImage(fileName);
 
         productRepository.save(record);
     }
