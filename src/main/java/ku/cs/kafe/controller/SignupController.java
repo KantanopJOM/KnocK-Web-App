@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package ku.cs.kafe.controller;
 
-import com.example.demo.entity.Member;
-import com.example.demo.service.SignupService;
+import ku.cs.kafe.entity.Member;
+import ku.cs.kafe.service.SignupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

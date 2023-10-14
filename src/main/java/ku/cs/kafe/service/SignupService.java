@@ -1,12 +1,10 @@
-package com.example.demo.service;
+package ku.cs.kafe.service;
 
-import com.example.demo.entity.Member;
-import com.example.demo.repository.MemberRepository;
+import ku.cs.kafe.entity.Member;
+import ku.cs.kafe.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 public class SignupService {

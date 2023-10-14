@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package ku.cs.kafe.controller;
 
 
 import org.springframework.security.core.Authentication;
