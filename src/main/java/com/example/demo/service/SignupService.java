@@ -1,7 +1,9 @@
-package ku.cs.kafe.service;
+package com.example.demo.service;
 
-import ku.cs.kafe.entity.Member;
-import ku.cs.kafe.repository.MemberRepository;
+import com.example.demo.entity.Member;
+import com.example.demo.model.SignupRequest;
+import com.example.demo.repository.MemberRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,22 +16,19 @@ public class SignupService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public boolean isUsernameAvailable(String username) {
         if (!username.equals("") && !username.equals("null") && !username.trim().isEmpty() && !username.contains(" ")) {
-            System.out.println("in if");
             return repository.findByUsername(username) == null;
         }else {
             return repository.findByUsername(username) != null;
         }
     }
 
-    public void createUser(Member user) {
-        Member record = new Member();
-        record.setFirstName(user.getFirstName());
-        record.setLastName(user.getLastName());
-        record.setUsername(user.getUsername());
-        record.setTel(user.getTel());
-        record.setAddress(user.getAddress());
+    public void createUser(SignupRequest user) {
+        Member record = modelMapper.map(user, Member.class);
 
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         record.setPassword(hashedPassword);

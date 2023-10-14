@@ -1,6 +1,6 @@
-package ku.cs.kafe.config;
+package com.example.demo.config;
 
-import ku.cs.kafe.service.UserDetailsServiceImp;
+import com.example.demo.service.UserDetailsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

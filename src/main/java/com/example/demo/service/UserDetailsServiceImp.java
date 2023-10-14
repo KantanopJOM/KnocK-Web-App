@@ -1,7 +1,7 @@
-package ku.cs.kafe.service;
+package com.example.demo.service;
 
-import ku.cs.kafe.entity.Member;
-import ku.cs.kafe.repository.MemberRepository;
+import com.example.demo.entity.Member;
+import com.example.demo.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

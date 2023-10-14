@@ -1,4 +1,4 @@
-package ku.cs.kafe.controller;
+package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

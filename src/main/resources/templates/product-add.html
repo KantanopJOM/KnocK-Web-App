@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo Web Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+<div class="container w-50 p-3">
+    <h1 class="display-5">Add Product</h1>
+    <form action="#" th:action="@{/products/add}" method="POST" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="productName">productName</label>
+            <input id="productName" type="input" class="form-control" name="productName" maxlength="50" required>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <label for="productPrice">Product Pricr</label>
+                <input id="productPrice" type="number" class="form-control" name="productPrice" required>
+            </div>
+            <div class="col">
+                <label for="productStock">Product Stock</label>
+                <input id="productStock" type="number" class="form-control" name="productStock" required>
+            </div>
+
+        </div>
+
+        <div class="mb-3">
+            <label for="productDesc">Product Description</label>
+            <textarea id="productDesc" class="form-control" name="productDesc" maxlength="200" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="productImage">Product Image</label>
+            <input id="productImage" type="file" class="form-control" name="productImage" accept="image/*"
+                   onchange="previewImage(this)">
+            <br>
+            <!--            <img id="preview" src="#" alt="Product Image" style="max-width: 20%; max-height: 200px; display: none;">-->
+            <div style="display: flex; justify-content: center;">
+                <img id="preview" src="#" alt="Product Image"
+                     style="max-width: 50%; max-height: 200px; display: none;">
+            </div>
+            <br>
+        </div>
+
+        <button id="submit-button" type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+    <script>
+        function previewImage(input) {
+            var preview = document.getElementById('preview');
+            var file = input.files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                preview.src = reader.result;
+                preview.style.display = 'block';
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '';
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+</div>
+
+</body>
+</html>
