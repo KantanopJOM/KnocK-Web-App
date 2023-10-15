@@ -1,9 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Category;
 import com.example.demo.entity.Product;
 import com.example.demo.model.ProductRequest;
-import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Service
@@ -19,27 +23,16 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
     private ModelMapper modelMapper;
 
     public List<Product> getAllProduct() {
+
         return productRepository.findAll();
     }
 
-    public void createProduct(ProductRequest request, MultipartFile productImage) {
+    public void createProduct(ProductRequest request) {
         Product record = modelMapper.map(request, Product.class);
-
-        Category category =
-                categoryRepository.findById(request.getCategoryId()).get();
-        record.setCategory(category);
-
-        String fileName = StringUtils.cleanPath(productImage.getOriginalFilename());
-        record.setProductImage(fileName);
-
         productRepository.save(record);
     }
-
 
 }
