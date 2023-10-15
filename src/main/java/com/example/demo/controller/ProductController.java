@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.ProductRequest;
+import com.example.demo.service.CategoryService;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,14 +26,19 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @GetMapping
     public String getAllProducts(Model model) {
-        model.addAttribute("products", productService.getAllProduct());
+        model.addAttribute("categories", categoryService.getAllCategories());
+        //model.addAttribute("products", productService.getAllProduct());
         return "product-all";
     }
 
     @GetMapping("/add")
     public String getProductForm(Model model) {
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "product-add";
     }
 

@@ -16,6 +16,14 @@
             <label for="productName">productName</label>
             <input id="productName" type="input" class="form-control" name="productName" maxlength="50" required>
         </div>
+        <div class="mb-3">
+            <label for="inputCategory">Category</label>
+            <select class="form-control" id="inputCategory" name="categoryId">
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}" th:text="${category.name}">
+                </option>
+            </select>
+        </div>
         <div class="row mb-3">
             <div class="col">
                 <label for="productPrice">Product Pricr</label>

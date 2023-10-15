@@ -17,4 +17,6 @@ public class ProductRequest {
     private int productStock;
 
     private MultipartFile productImage;
+
+    private UUID categoryId;
 }
