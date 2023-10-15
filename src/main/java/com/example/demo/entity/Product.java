@@ -18,6 +18,6 @@ public class Product {
     private String productDesc;
     private double productPrice;
     private int productStock;
-    private String productImage;
+    private String productImageUrl;
 
 }

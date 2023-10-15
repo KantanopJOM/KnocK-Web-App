@@ -1,9 +1,6 @@
 package com.example.demo.model;
 
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.UUID;
 
 @Data
 public class ProductRequest {
@@ -16,5 +13,5 @@ public class ProductRequest {
 
     private int productStock;
 
-    private MultipartFile productImage;
+    private String productImageUrl;
 }
