@@ -14,4 +14,7 @@ public class ProductRequest {
     private int productStock;
 
     private String productImageUrl;
+
+    private String category;
+
 }

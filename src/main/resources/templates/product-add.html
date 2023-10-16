@@ -30,12 +30,13 @@
             <label for="productName">productName</label>
             <input id="productName" type="input" class="form-control" name="productName" maxlength="50" required>
         </div>
-        <div class="mb-3">
-            <label for="inputCategory">Category</label>
-            <select class="form-control" id="inputCategory" name="categoryId">
-                <option th:each="category : ${categories}"
-                        th:value="${category.id}" th:text="${category.name}">
-                </option>
+        <div class="form-group">
+            <label for="category">Select list:</label>
+            <select class="form-control" id="category" name="category">
+                <option>Bed</option>
+                <option>Chair</option>
+                <option>Table</option>
+                <option>Misc</option>
             </select>
         </div>
         <div class="row mb-3">
