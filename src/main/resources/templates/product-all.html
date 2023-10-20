@@ -5,6 +5,7 @@
     <title>Demo Web Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -19,12 +20,48 @@
                 <div class="card-body">
                     <!-- Product Name -->
                     <h5 class="card-title" th:text="${product.productName}"></h5>
-
                     <!-- Product Price -->
                     <p class="card-text"
-                       th:text="${#numbers.formatDecimal(product.productPrice, 1, 'COMMA', 2, 'POINT')}"></p>
+                       th:text="${#numbers.formatDecimal(product.productPrice, 1, 'COMMA', 2, 'POINT')}">
+
+                    </p>
+                </div>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary mb-3 mx-auto" data-bs-toggle="modal" th:data-bs-target="'#productModal'+${product.productId}">
+                        View Details
+                    </button>
                 </div>
             </div>
+
+            <!-- model  -->
+            <div class="modal fade" th:id="'productModal'+${product.productId}" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="productModalLabel">Product Describe</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <!-- Product Image in Modal -->
+                                <div class="col-md-6">
+                                    <img th:src="${product.productImageUrl}" class="img-fluid mb-3" alt="Product Image">
+                                </div>
+                                <!-- Product Details in Modal -->
+                                <div class="col-md-6">
+                                    <h6 class="my-3" th:text="${product.productName}"></h6>
+                                    <p class="my-3" th:text="'Describe: ' + ${product.productDesc}"></p>
+                                    <p class="my-3">Price: <span style="display: inline-block; font-weight:bold;" th:text=" ${#numbers.formatDecimal(product.productPrice, 1, 'COMMA', 2, 'POINT')}"></span></p>
+                                    <button type="button" class="btn btn-primary">
+                                        ADD TO CART
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
