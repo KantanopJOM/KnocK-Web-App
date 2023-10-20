@@ -19,5 +19,6 @@ public class Product {
     private double productPrice;
     private int productStock;
     private String productImageUrl;
+    private String category;
 
 }
