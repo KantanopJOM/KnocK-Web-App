@@ -49,9 +49,12 @@
                                 </div>
                                 <!-- Product Details in Modal -->
                                 <div class="col-md-6">
-                                    <h6 class="my-3" th:text="${product.productName}"></h6>
-                                    <p class="my-3" th:text="'Describe: ' + ${product.productDesc}"></p>
-                                    <p class="my-3">Price: <span style="display: inline-block; font-weight:bold;" th:text=" ${#numbers.formatDecimal(product.productPrice, 1, 'COMMA', 2, 'POINT')}"></span></p>
+                                    <h6 class="my-1" th:text="${product.productName}"></h6>
+                                    <p class="my-1">Price: <span style="display: inline-block; font-weight:bold;" th:text=" ${#numbers.formatDecimal(product.productPrice, 1, 'COMMA', 2, 'POINT')}"></span></p>
+                                    <p class="my-1" th:text="'Describe: ' + ${product.productDesc}" style="word-wrap: break-word;"></p>
+
+                                    <p class="my-1" style="font-size: 12px;" th:text="${product.productStock} + ' Each in stock'"></p>
+
                                     <button type="button" class="btn btn-primary">
                                         ADD TO CART
                                     </button>
