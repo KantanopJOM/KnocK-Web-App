@@ -1,24 +1,19 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Cart;
+import com.example.demo.entity.Member;
+import com.example.demo.entity.Product;
 import com.example.demo.model.ProductRequest;
+import com.example.demo.service.CartService;
+import com.example.demo.service.MemberService;
 import com.example.demo.service.ProductService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.security.Principal;
+import java.util.UUID;
 
 
 @Controller
@@ -27,6 +22,12 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private MemberService memberService;
 
     @GetMapping
     public String getAllProducts(Model model) {
@@ -45,5 +46,19 @@ public class ProductController {
         productService.createProduct(product);
         return "redirect:/products";
     }
+
+    @PostMapping("/addToCart")
+    public String addToCart(@RequestParam UUID productId, Principal principal) {
+        Member owner = memberService.getByUsername(principal.getName());
+        Product product = productService.getProductById(productId);
+        Cart cart = cartService.getCartByOwner(owner);
+        if (cart == null) {
+            cart = cartService.createCart(owner);
+        }
+
+        cartService.addToCart(cart, product, 1); // 1 is the default quantity
+        return "redirect:/products";
+    }
+
 
 }

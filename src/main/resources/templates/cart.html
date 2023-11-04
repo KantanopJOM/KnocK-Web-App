@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- CSS for product table formatting -->
+    <style>
+        .row.mb-4:not(:last-child) {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<!-- Include header -->
+<div th:insert="~{fragments/header :: header}"></div>
+
+<!-- Cart content mt-5 -->
+<div class="container mt-5">
+    <div th:if="${not #lists.isEmpty(cart.cartItems)}">
+        <h2>Your Cart</h2>
+        <!-- Loop through cart items -->
+        <div class="row">
+
+            <div th:each="cartItem, cartIndex : ${cart.cartItems}" class="row mb-4"
+                 th:attr="data-cart-item-id=${cartItem.cartItemId}">
+                <div class="col-md-2 d-flex align-items-center">
+                    <!-- Product image -->
+                    <img th:src="${cartItem.product.productImageUrl}" class="img-fluid img-thumbnail"
+                         alt="Product Image">
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <!-- Product name -->
+                        <h4 th:text="${cartItem.product.productName}"></h4>
+                        <!-- Product price -->
+                        <p th:text="'Price: $' + ${cartItem.product.productPrice}"></p>
+
+                        <div class="row mb-3">
+
+                            <!-- Quantity buttons -->
+                            <div class="col col-1">
+                                <p>Quantity</p>
+                            </div>
+
+                            <!-- ใน HTML ที่แสดงรายการสินค้า -->
+                            <div class="col d-flex justify-content-center">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <form th:action="@{/cartItem/updateQuantity}" method="POST">
+                                            <!-- ลด Quantity -->
+                                            <!-- th:data-cartItemId="${cartItem.cartItemId}"   class="updateQuantityForm"-->
+                                            <button class="btn btn-outline-secondary"
+                                                    th:data-cart-item-id="${cartItem.cartItemId}"
+                                                    th:data-quantity="-1"
+                                                    onclick="updateQuantity(this)">
+                                                -
+                                            </button>
+                                        </form>
+                                    </div>
+
+
+                                    <div class="input-group-prepend">
+                                        <form th:action="@{/cartItem/updateQuantityFromTagInput}" method="POST">
+                                            <input type="text" class="form-control text-center"
+
+                                                   th:value="${cartItem.quantity}"
+                                                   th:data-cart-item-id="${cartItem.cartItemId}"
+                                                   oninput="validateNumericInput(this)"
+                                                   onblur="updateQuantityFromTagInput(this)"
+                                                   onkeydown="return event.key !== 'Enter';">
+                                        </form>
+                                    </div>
+
+
+                                    <div class="input-group-append">
+                                        <!-- เพิ่ม Quantity -->
+                                        <form th:action="@{/cartItem/updateQuantity}" method="POST">
+                                            <!-- ลด Quantity -->
+                                            <!--                                        th:data-cartItemId="${cartItem.cartItemId}"   class="updateQuantityForm"-->
+                                            <button class="btn btn-outline-secondary"
+                                                    th:data-cart-item-id="${cartItem.cartItemId}"
+                                                    th:data-quantity="1"
+                                                    onclick="updateQuantity(this)">
+                                                +
+                                            </button>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <!-- Total price -->
+                                <p th:text="'Total: $' + (${cartItem.product.productPrice} * ${cartItem.quantity})"
+                                   th:attr="data-total-price=${cartItem.product.productPrice * cartItem.quantity}"
+                                   id="totalPrice-${cartItem.cartItemId}"></p></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div th:if="${#lists.isEmpty(cart.cartItems)}">
+        <p>Your cart is empty.</p>
+    </div>
+</div>
+<script>
+    function updateQuantity(button) {
+        // cartItemId, quantityChange
+        var cartItemId = button.getAttribute('data-cart-item-id');
+        var quantityChange = button.getAttribute('data-quantity');
+        // console.log(cartItemId);
+        // console.log(quantityChange);
+        // ประกาศ form element
+        var form = button.closest('form');
+
+        // สร้าง input element ที่จะเก็บค่า cartItemId
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'cartItemId';
+        input.value = cartItemId;
+
+        // เพิ่ม input element เข้าไปใน form
+        form.appendChild(input);
+
+        // สร้าง input element ที่จะเก็บค่า quantityChange
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'quantityChange';
+        input.value = quantityChange;
+
+        // เพิ่ม input element เข้าไปใน form
+        form.appendChild(input);
+
+        // ส่ง form
+        form.submit();
+    }
+
+    function updateQuantityFromTagInput(button) {
+        // ประกาศ form element
+        var cartItemId = button.getAttribute('data-cart-item-id');
+        var quantityChange = button.value;
+        // ประกาศ form element
+        var form = button.closest('form');
+
+        // สร้าง input element ที่จะเก็บค่า cartItemId
+        var input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'cartItemId';
+        input.value = cartItemId;
+
+        // เพิ่ม input element เข้าไปใน form
+        form.appendChild(input);
+
+        // สร้าง input element ที่จะเก็บค่า quantityChange
+        input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'quantityChange';
+        input.value = quantityChange;
+
+        // เพิ่ม input element เข้าไปใน form
+        form.appendChild(input);
+
+        // ส่ง form
+        form.submit()
+
+    }
+
+    function validateNumericInput(input) {
+        // เลือกเฉพาะตัวเลขจากคีย์บอร์ด
+        input.value = input.value.replace(/[^0-9]/g, '');
+    }
+</script>
+</body>
+</html>

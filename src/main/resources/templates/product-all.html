@@ -15,58 +15,34 @@
         <!-- Thymeleaf iteration to display products -->
         <div th:each="product : ${products}" class="col-md-4 mb-3">
             <div class="card">
+
                 <!-- Product Image -->
                 <img th:src="${product.productImageUrl}" class="card-img-top" alt="Product Image">
                 <div class="card-body">
                     <!-- Product Name -->
                     <h5 class="card-title" th:text="${product.productName}"></h5>
+                    <!-- Product Description (showing only the first 10 characters) -->
+                    <p class="card-text"
+                       th:text="${product.productDesc.length() > 40 ? product.productDesc.substring(0, 40): product.productDesc}"></p>
                     <!-- Product Price -->
                     <p class="card-text"
                        th:text="${#numbers.formatDecimal(product.productPrice, 1, 'COMMA', 2, 'POINT')}">
-
                     </p>
                 </div>
+
                 <div class="text-center">
-                    <button type="button" class="btn btn-primary mb-3 mx-auto" data-bs-toggle="modal" th:data-bs-target="'#productModal'+${product.productId}">
-                        View Details
-                    </button>
+                    <form th:action="@{/products/addToCart}" method="post">
+                        <input type="hidden" name="productId" th:value="${product.productId}" />
+                        <button type="submit" class="btn btn-primary mb-3 mx-auto">
+                            ADD TO CART
+                        </button>
+                    </form>
                 </div>
+
             </div>
-
-            <!-- model  -->
-            <div class="modal fade" th:id="'productModal'+${product.productId}" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="productModalLabel">Product Describe</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <!-- Product Image in Modal -->
-                                <div class="col-md-6">
-                                    <img th:src="${product.productImageUrl}" class="img-fluid mb-3" alt="Product Image">
-                                </div>
-                                <!-- Product Details in Modal -->
-                                <div class="col-md-6">
-                                    <h6 class="my-1" th:text="${product.productName}"></h6>
-                                    <p class="my-1">Price: <span style="display: inline-block; font-weight:bold;" th:text=" ${#numbers.formatDecimal(product.productPrice, 1, 'COMMA', 2, 'POINT')}"></span></p>
-                                    <p class="my-1" th:text="'Describe: ' + ${product.productDesc}" style="word-wrap: break-word;"></p>
-
-                                    <p class="my-1" style="font-size: 12px;" th:text="${product.productStock} + ' Each in stock'"></p>
-
-                                    <button type="button" class="btn btn-primary">
-                                        ADD TO CART
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>
+
 </body>
 </html>

@@ -17,4 +17,3 @@ public class SignupRequest {
 
     private String address;
 }
-

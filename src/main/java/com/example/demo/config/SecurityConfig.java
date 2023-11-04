@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
                         //.requestMatchers(new AntPathRequestMatcher("/product/add")).hasRole("ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -55,5 +56,4 @@ public class SecurityConfig {
         return (web) -> web.ignoring()
                 .requestMatchers(new AntPathRequestMatcher("/h2-console/**"));
     }
-
 }
