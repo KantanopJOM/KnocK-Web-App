@@ -75,5 +75,12 @@ public class CartItemController {
 
     }
 
+    @PostMapping("/deleteItemInCartItem")
+    public String deleteItemInCartItem(@RequestParam UUID cartItemId) {
+        System.out.println("CONTROLLER");
+        cartItemService.deleteItemInCartItem(cartItemId);
+        return "redirect:/cart";
+    }
+
 }
 

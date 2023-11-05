@@ -62,4 +62,8 @@ public class CartItemService {
         }
 
     }
+
+    public void deleteItemInCartItem(UUID cartItemId) {
+        cartItemRepository.deleteById(cartItemId);
+    }
 }
