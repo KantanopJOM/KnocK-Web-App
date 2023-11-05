@@ -53,8 +53,7 @@ public class CartItemController {
     }
 
     @PostMapping("/updateQuantity")
-    public String updateQuantity(@RequestParam UUID cartItemId, @RequestParam int quantityChange) {
-        System.out.println(cartItemId);
+    public String updateQuantity(@RequestParam UUID cartItemId, @RequestParam int quantityChange, Model model) {
         try {
             cartItemService.updateQuantity(cartItemId, quantityChange);
             return "redirect:/cart";
