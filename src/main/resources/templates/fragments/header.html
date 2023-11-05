@@ -33,6 +33,10 @@
         <div sec:authorize="isAuthenticated()">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
+                        <!-- ส่วนที่ต้องการแสดงถ้าผู้ใช้ล็อกอิน -->
+                        <a class="nav-link" th:href="@{/cart}">Cart</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#">สวัสดี <b><span sec:authentication="name"></span></b></a>
                 </li>
                 <li class="nav-item">
