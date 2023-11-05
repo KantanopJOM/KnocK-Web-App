@@ -126,7 +126,9 @@
                                 <span class="remove-button float-end"
                                       th:data-cart-item-id="${cartItem.cartItemId}"
                                       onclick="removeCartItem(this)">
-                                     <img class="trash-can" src="https://cdn2.iconfinder.com/data/icons/basic-thin-line-color/21/24-256.png" alt="Trash Can" width=25px>
+                                     <img class="trash-can"
+                                          src="https://cdn2.iconfinder.com/data/icons/basic-thin-line-color/21/24-256.png"
+                                          alt="Trash Can" width=25px>
                                 </span>
                             </form>
                         </div>
@@ -135,23 +137,25 @@
                 </div>
             </div>
 
-            <div class="col p-2">
-                <div class="block m-0 p-1" id="order">
+            <div class="col ms-3 p-2">
+                <div class="block m-0 p-2" id="order">
                     <h5>
                         Order Summary
                     </h5>
                     <h6>
                         payment details
                     </h6>
-
                     <div class="row">
                         <div class="col">
                             <p>Total</p>
                         </div>
-                        <div class="col">
+                        <div class="col p-1 float-end">
                             <p id="totalPrice">฿0.00</p>
                         </div>
                     </div>
+                    <form th:action="@{/PurchaseOrder/createOrder}" method="POST">
+                        <button type="submit" class="btn btn-primary">Checkout</button>
+                    </form>
                 </div>
             </div>
         </div>

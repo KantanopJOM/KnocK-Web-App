@@ -56,4 +56,9 @@ public class CartService {
                 .findFirst()
                 .orElse(null);
     }
+
+    public void clearCart(Cart cart) {
+        cart.getCartItems().clear();
+        cartRepository.save(cart);
+    }
 }

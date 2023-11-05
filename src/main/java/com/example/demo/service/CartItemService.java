@@ -4,11 +4,13 @@ import com.example.demo.entity.Cart;
 import com.example.demo.entity.CartItem;
 import com.example.demo.entity.Product;
 import com.example.demo.repository.CartItemRepository;
+import com.example.demo.repository.CartRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -18,6 +20,9 @@ public class CartItemService {
 
     @Autowired
     private CartItemRepository cartItemRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
 
     public void saveCartItem(CartItem cartItem) {
         cartItemRepository.save(cartItem);
@@ -66,4 +71,5 @@ public class CartItemService {
     public void deleteItemInCartItem(UUID cartItemId) {
         cartItemRepository.deleteById(cartItemId);
     }
+
 }
