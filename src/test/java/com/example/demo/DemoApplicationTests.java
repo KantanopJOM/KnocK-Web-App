@@ -1,13 +1,12 @@
 package com.example.demo;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
 
-@SpringBootTest
-class DemoApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
+@RunWith(Cucumber.class)
+@CucumberOptions(features = "classpath:features",
+		plugin = {"pretty", "html:target/cucumber.html"})
+public class DemoApplicationTests {
 
 }
