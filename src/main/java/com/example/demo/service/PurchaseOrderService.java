@@ -66,19 +66,21 @@ public class PurchaseOrderService {
         cartService.clearCart(cart);
     }
 
-    public List<PurchaseOrder> getAllOrders() {
+
+    public List<PurchaseOrder> getAllPurchaseOrder() {
         return purchaseOrderRepository.findAll();
     }
 
-    public PurchaseOrder getById(UUID orderId) {
-        return purchaseOrderRepository.findById(orderId).get();
-    }
-
     public void finishOrder(UUID orderId) {
-        PurchaseOrder record = purchaseOrderRepository.findById(orderId).get();
+        PurchaseOrder record = purchaseOrderRepository.getReferenceById(orderId);
         record.setStatus(Status.FINISH);
         purchaseOrderRepository.save(record);
     }
 
+    public void editStatusOrder(UUID orderId) {
+        PurchaseOrder record = purchaseOrderRepository.getReferenceById(orderId);
+        record.setStatus(Status.ORDER);
+        purchaseOrderRepository.save(record);
+    }
 
 }
