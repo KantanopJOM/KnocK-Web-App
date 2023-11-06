@@ -253,13 +253,13 @@
         var cartItemId = button.getAttribute('data-cart-item-id');
 
         var form = button.closest('form');
-        console.log(form)
+        // console.log(form)
 
         var input = document.createElement('input');
         input.type = 'hidden';
         input.name = 'cartItemId';
         input.value = cartItemId;
-        console.log(input.value)
+        // console.log(input.value)
 
         form.appendChild(input);
 
