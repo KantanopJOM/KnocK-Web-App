@@ -24,5 +24,35 @@ public class OrderItem {
 
     private int productQuantity;
 
+    public UUID getOrderItemId() {
+        return orderItemId;
+    }
 
+    public void setOrderItemId(UUID orderItemId) {
+        this.orderItemId = orderItemId;
+    }
+
+    public PurchaseOrder getPurchaseOrder() {
+        return purchaseOrder;
+    }
+
+    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
+        this.purchaseOrder = purchaseOrder;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
+    }
 }

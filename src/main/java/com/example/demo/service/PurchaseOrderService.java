@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -63,6 +64,20 @@ public class PurchaseOrderService {
 
 
         cartService.clearCart(cart);
+    }
+
+    public List<PurchaseOrder> getAllOrders() {
+        return purchaseOrderRepository.findAll();
+    }
+
+    public PurchaseOrder getById(UUID orderId) {
+        return purchaseOrderRepository.findById(orderId).get();
+    }
+
+    public void finishOrder(UUID orderId) {
+        PurchaseOrder record = purchaseOrderRepository.findById(orderId).get();
+        record.setStatus(Status.FINISH);
+        purchaseOrderRepository.save(record);
     }
 
 

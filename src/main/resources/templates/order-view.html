@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kafe Application</title>
+    <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:insert="~{fragments/header :: header}"></div>
+
+
+<div class="container w-50 p-3">
+    <h1 class="display-6">Order</h1>
+
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
+        <tr style="text-align: center; vertical-align: top; " class="table-secondary">
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${order ne null}" th:each="order : ${order.orderItems}" >
+            <td th:text="${order.product.productName}"></td>
+            <td style="text-align: right" th:text="${#numbers.formatDecimal(order.product.productPrice, 1, 'COMMA', 2, 'POINT')}"></td>
+            <td style="text-align: right" th:text="${order.product.productStock}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <form action="#"
+          th:action="@{/admin/orders/{orderId}/finish(orderId=${order.id})}"
+          method="POST">
+        <button id="submit-button" type="submit"
+                class="btn btn-primary">Finish Order</button>
+    </form>
+</div>
+</body>
+</html>

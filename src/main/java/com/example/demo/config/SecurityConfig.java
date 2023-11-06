@@ -28,6 +28,7 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/js/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/product/add")).hasRole("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("order")).hasRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )
