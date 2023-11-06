@@ -28,7 +28,16 @@
             <input type="password" name="password" id="inputPassword"
                    class="form-control" required>
         </div>
-        <button id="submit-button" type="submit" class="btn btn-primary">Login</button>
+        <div class="row">
+            <div class="col">
+                <button id="submit-button" type="submit" class="btn btn-primary">Login</button>
+            </div>
+
+            <div class="col">
+                <a th:href="@{/signup}" class="float-end">Sign Up</a>
+            </div>
+        </div>
+
     </form>
 </div>
 

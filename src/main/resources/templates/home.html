@@ -6,24 +6,40 @@
     <title>Demo Web Application</title>
     <link th:rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/bootstrap.min.js}"></script>
+
+    <style>
+        header{
+            /*background-color: #333;*/
+            background-image: url(https://cdn.pixabay.com/photo/2016/04/18/13/53/room-1336497_1280.jpg);
+            background-position: center center;
+            background-size: cover;
+            color: white;
+            height: 92vh;
+            /*width: 100vw;*/
+            text-align: center;
+            padding: 2rem;
+            padding-top: 12rem;
+        }
+        header h1{
+            font-size: 3rem;
+        }
+        header p{
+            margin: 1rem 0;
+        }
+        header .btn{
+            display: inline-block;
+            text-decoration: none;
+            background: #f4f4f4;
+            color: black;
+            padding: 0.75rem 2rem;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
-<div class="container-fluid">
-
-    <h1 class="display-6">Welcome to Demo</h1>
-
-    <p><span th:text="${greeting}"></span></p>
-
-    <div sec:authorize="isAuthenticated()">
-        <p>Khun <b><span sec:authentication="name"></span></b></p>
-        <a class="btn btn-primary" th:href="@{/logout}">Logout</a>
-    </div>
-    <div sec:authorize="isAnonymous()">
-        <a class="btn btn-primary" th:href="@{/login}">Login</a>
-        <a class="btn btn-light" th:href="@{/signup}">Sign Up</a>
-    </div>
-
-</div>
+<header>
+    <h1>Wecome to Website</h1>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae debitis sequi et obcaecati, velit eligendi amet est sed autem, facere ut vitae, nesciunt natus. Nam atque minus dicta nostrum voluptates.</p>
+</header>
 </body>
 </html>
