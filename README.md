@@ -15,6 +15,8 @@
 5. คลิกขวา เลือกคำสั่ง "Run DemoApplication"
 6. เปิดเว็บเบราว์เซอร์กรอก URL: http://localhost:9001/
 
+Jira: https://knockdevelop.atlassian.net/jira/core/projects/KNOC
+
 อ้างอิง
 Bootstrap: https://getbootstrap.com/
 Thymeleaf: https://www.thymeleaf.org/
