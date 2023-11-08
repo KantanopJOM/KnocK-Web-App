@@ -22,6 +22,5 @@ Bootstrap: https://getbootstrap.com/
 Thymeleaf: https://www.thymeleaf.org/
 
 ผู้จัดทำ
-  Kantanop Supannakoon 6210451063
-  Sorasak Pongsaawt 6210451560
-
+1.Kantanop Supannakoon 6210451063
+2.Sorasak Pongsaawt 6210451560
