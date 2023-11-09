@@ -26,7 +26,7 @@
                        th:text="${product.productDesc.length() > 30 ? product.productDesc.substring(0, 30): product.productDesc}"></p>
                     <!-- Product Price -->
                     <p class="card-text"
-                       th:text="'Price: '+${#numbers.formatDecimal(product.productPrice, 1, 'COMMA', 2, 'POINT')} + ' Bath.'">
+                       th:text="'Price: '+${#numbers.formatDecimal(product.productPrice, 1, 'COMMA', 2, 'POINT')} + ' Baht.'">
                     </p>
                 </div>
 
