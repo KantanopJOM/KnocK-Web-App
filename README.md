@@ -18,5 +18,5 @@
 Jira: https://knockdevelop.atlassian.net/jira/core/projects/KNOC
 
 ผู้จัดทำ
-1.Kantanop Supannakoon 6210451063
-2.Sorasak Pongsaawt 6210451560
+1. Kantanop Supannakoon 6210451063
+2. Sorasak Pongsaawt 6210451560
