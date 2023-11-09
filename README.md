@@ -8,8 +8,8 @@
 3. ล็อกอินและสมัครสมาชิก: สามารถล็อกอินหรือสมัครสมาชิกเพื่อบันทึกข้อมูลและประวัติการสั่งซื้อ
 
 วิธีการใช้
-1. ดาวน์โหลดโปรเจ็ค: git clone https://github.com/KantanopJOM/demo.git
-2. เข้าไปในไดเรกทอรี: cd [ชื่อโปรเจ็ค]
+1. ดาวน์โหลดโปรเจ็ค: git clone https://github.com/KantanopJOM/demo.git](https://github.com/KantanopJOM/KnocK-Web-App.git
+2. เข้าไปในไดเรกทอรี: cd /KnocK-Web-App
 3. เปิดโฟลเดอร์ด้วย Intellij
 4. ไปที่ไฟล์ DemoApplication
 5. คลิกขวา เลือกคำสั่ง "Run DemoApplication"
