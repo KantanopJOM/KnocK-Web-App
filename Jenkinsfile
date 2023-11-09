@@ -4,7 +4,7 @@ pipeline {
           stage('Source') {
                steps {
                     git branch: 'main',
-                        url: 'https://github.com/KantanopJOM/demo.git'
+                        url: 'https://github.com/KantanopJOM/KnocK-Web-App.git'
                }
           }
           stage('Build') {
