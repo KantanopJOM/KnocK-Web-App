@@ -17,10 +17,6 @@
 
 Jira: https://knockdevelop.atlassian.net/jira/core/projects/KNOC
 
-อ้างอิง
-Bootstrap: https://getbootstrap.com/
-Thymeleaf: https://www.thymeleaf.org/
-
 ผู้จัดทำ
 1.Kantanop Supannakoon 6210451063
 2.Sorasak Pongsaawt 6210451560
