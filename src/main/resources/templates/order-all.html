@@ -9,9 +9,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-
-    </style>
 </head>
 <body>
 <div th:insert="~{fragments/header :: header}"></div>
@@ -32,38 +29,92 @@
             <td th:text="${#temporals.format(order.timestamp, 'dd/MM/yyyy HH:mm')}" style="width:30%"></td>
             <td th:text="${order.status}" style="width:30%"></td>
             <td th:text="${order.owner.getFirstName()} + ' ' + ${order.owner.getLastName()}" style="width:30%"></td>
-            <td style="text-align: center" >
+            <td style="text-align: center">
                 <!--                <button class="btn btn btn-secondary btn-sm"><i class="fa fa-search"></i></button>-->
                 <div class="row">
                     <div class="col p-0">
-                        <form th:action="@{/admin/orders/finish}"
-                              method="POST">
-                            <button class="btn btn btn-success btn-sm"
-                                    th:data-order-id="${order.getOrderId}"
-                                    onclick="finish(this)">
-                                <i class="fa fa-check-square"></i>
-                            </button>
-                        </form>
+                        <button class="btn btn btn-success btn-sm"
+                                data-bs-toggle="modal"
+                                th:data-bs-target="'#confirmModal'+${order.getOrderId}">
+                            <i class="fa fa-check-square"></i>
+                        </button>
+                        <!--                        model-->
+                        <div class="modal fade" th:id="'confirmModal'+${order.getOrderId}" tabindex="-1" role="dialog"
+                             aria-labelledby="confirmModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmModalLabel">Are you sure</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">Confirm Status Change</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                        <form th:action="@{/admin/orders/finish}"
+                                              method="POST">
+                                            <button type="button" class="btn btn-success"
+                                                    th:data-order-id="${order.getOrderId}" onclick="finish(this)">
+                                                Confirm
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
                     <div class="col p-0">
-                        <form th:action="@{/admin/orders/editStatus}"
-                              method="POST">
-                            <button class="btn btn btn-warning btn-sm"
-                                    th:data-order-id="${order.getOrderId}"
-                                    onclick="editStatus(this)">
-                                <i class="fa fa-pencil"></i>
-                            </button>
-                        </form>
+                        <button class="btn btn btn-warning btn-sm"
+                                data-bs-toggle="modal"
+                                th:data-bs-target="'#cancelConfirmModal'+${order.getOrderId}">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+
+
+                        <div class="modal fade" th:id="'cancelConfirmModal'+${order.getOrderId}" tabindex="-1"
+                             role="dialog"
+                             aria-labelledby="cancelConfirmModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="cancelConfirmModalLabel">Are you sure</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">Cancel Confirm Status Change</div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                        <form th:action="@{/admin/orders/editStatus}"
+                                              method="POST">
+                                            <button type="button" class="btn btn-warning"
+                                                    th:data-order-id="${order.getOrderId}" onclick="editStatus(this)">
+                                                Confirm
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </td>
         </tr>
         </tbody>
     </table>
+
+
+    <!--    <div class="text-center">-->
+    <!--        <button type="button" class="btn btn-primary mb-3 mx-auto" data-bs-toggle="modal"-->
+    <!--            data-bs-target="#productModal">-->
+    <!--            pop up-->
+    <!--        </button>-->
+    <!--    </div>-->
 </div>
 </body>
 <script>
     function finish(button) {
+
         var orderId = button.getAttribute('data-order-id');
         // console.log(orderId);
 
@@ -78,6 +129,7 @@
         form.appendChild(input);
 
         form.submit();
+
     }
 
     function editStatus(button) {
