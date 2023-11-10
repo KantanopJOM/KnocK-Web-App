@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -68,7 +69,12 @@ public class PurchaseOrderService {
 
 
     public List<PurchaseOrder> getAllPurchaseOrder() {
-        return purchaseOrderRepository.findAll();
+
+        List<PurchaseOrder> purchaseOrders = purchaseOrderRepository.findAll();
+        purchaseOrders.sort(Comparator.comparing(PurchaseOrder::getTimestamp).reversed());
+
+//        return purchaseOrderRepository.findAll();
+        return purchaseOrders;
     }
 
     public void finishOrder(UUID orderId) {
